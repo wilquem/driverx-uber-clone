@@ -1,0 +1,11 @@
+{
+    "colors": {
+        "primary": "#000000",
+        "light":"#ffffff",
+        "info":"#32353D",
+        "embarque":"#00D916",
+        "destino":"#FE0000",
+        "muted":"#C9C9C9",
+        "muted50":"#f9f9f9"
+    }
+}
