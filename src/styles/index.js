@@ -1,6 +1,8 @@
 import styled from 'styled-components/native';
 import theme from './theme.json';
 
+import MapView from 'react-native-maps';
+
 export const Container = styled.View`
     flex: 1;
     background-color:${(props) => props.color ? theme.colors[props.color] : 'transparent'};
@@ -38,9 +40,9 @@ export const CreditCardNumber = styled.Text`
 `
 
 export const Button = styled.TouchableOpacity`
-    width:100%;
+    background-color:${(props) => props.color ? theme.colors[props.color] : 'transparent'};
     padding: ${(props) => props.compact ? 5 : 15}px;
-    margin:${(props) => props.margin ? 5 : 10}px;
+    margin:${(props) => props.margin ? 15 : 0}px;
     opacity: ${(props) => props.disabled ? 0.5 : 1};
     border: 0.5px solid #000;
     flex-direction: ${(props) => props.column ? 'column' : 'row'};
@@ -92,4 +94,47 @@ export const Input = styled.TextInput`
 export const Spacer = styled.View`
     width: ${(props) => props.width || '100%'};
     height: ${props => props.height || 10}px;
+`
+
+export const AdressList = styled.FlatList`
+    flex: 1;
+    width: 100%;
+    padding-top: 10px;
+`
+
+export const AdressItem = styled.TouchableOpacity`
+    padding: 5px 0 10px;
+    align-items: flex-start;
+`
+
+export const Map = styled(MapView)`
+    flex: 1;
+    width: 100%;
+    height: 100%;
+    opacity: ${props => props.disabled ? 0.2 : 1}
+`
+
+export const Avatar = styled.Image.attrs({
+    elevation: 50,
+})`
+    width: ${props => props.small ? '35px' : '50px'};
+    height: ${props => props.small ? '35px' : '50px'};
+    box-shadow: 0px 4px 4px rgba(0,0,0,0.25);
+    background: ${theme.colors.muted};
+    border-radius: ${props => props.small ? '35px' : '50px'};
+`
+
+export const VerticalSeparator = styled.View`
+    width: 1px;
+    height: 100%;
+    background-color:${theme.colors.muted}
+`
+
+export const Bullet = styled.View`
+    width:8px;
+    height:8px;
+    border-radius:8px;
+    background-color:${props => props.destination ? theme.colors.destino : theme.colors.embarque};
+    margin-right: 10px;
+    margin-top:2px
 `
