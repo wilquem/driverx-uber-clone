@@ -18,8 +18,8 @@ import {
 const Pulse = require('react-native-pulse').default;
 
 export default function Home() {
-  const tipo = 'P';
-  const status = 'P'; //S = SEM CORRIDA, I = INFORMAÇÔES, P = PESQUISA, C = CORRIDA
+  const tipo = 'M';
+  const status = 'C'; //S = SEM CORRIDA, I = INFORMAÇÔES, P = PESQUISA, C = CORRIDA
 
   return (
     <Container color="light">
@@ -43,7 +43,7 @@ export default function Home() {
         {/* PARTE SUPERIOR */}
         <Container height={140} justify="flex-start" align="flex-start">
           {/* AVATAR */}
-          {status == 'S' && (
+          {status == 'S' || tipo == "M" && (
             <TouchableOpacity>
               <Avatar
                 source={{
@@ -52,7 +52,7 @@ export default function Home() {
               />
             </TouchableOpacity>
           )}
-          {status != 'S' && (
+          {status != 'S' && tipo == "P" && (
             <Container color="light" elevation={50} justify="flex-end">
               <Container padding={20}>
                 <Container justify="flex-start" align="center" row>
@@ -72,7 +72,6 @@ export default function Home() {
           )}
         </Container>
         {/* PASSAGEIRO PROCURANDO CORRIDA */}
-
         {status == 'P' && tipo == 'P' && (
           <Container padding={20} zIndex={-1}>
             <Pulse
@@ -98,6 +97,7 @@ export default function Home() {
               />
             </Container>
           )}
+
           {/* PASSAGEIRO INFORMAÇÔES DA CORRIDA */}
           {tipo == 'P' && (status == 'I' || status == 'P') && (
             <Container justify="flex-end" align="flex-start">
@@ -121,10 +121,78 @@ export default function Home() {
               </Button>
             </Container>
           )}
-          {tipo == 'M' && (
+
+          {/* PASSAGEIRO EM CORRIDA */}
+          {tipo == 'P' && status == 'C' && (
+            <Container border="primary" justify="flex-end" align="flex-start">
+              <Container padding={20} row>
+                <Container align="flex-start" row>
+                  <Avatar
+                    small
+                    source={{
+                      uri: 'https://avatars.githubusercontent.com/u/93217081?v=4',
+                    }}
+                  />
+                  <Spacer width="10px" />
+                  <Container align="flex-start">
+                    <Subtitle bold>Felipe Souza</Subtitle>
+                    <Subtitle small>ABC-123, BMW X6, Preta</Subtitle>
+                  </Container>
+                </Container>
+                <VerticalSeparator />
+                <Container width={120}>
+                  <Title>R$ 12,90</Title>
+                  <Subtitle bold>Aprox. 5 mins</Subtitle>
+                </Container>
+              </Container>
+              <Button color="muted">
+                <ButtonText>Cancelar DriverX</ButtonText>
+              </Button>
+            </Container>
+          )}
+
+          {/* MOTORISTA SEM CORRIDA */}
+          {tipo == 'M' && status == 'S' && (
             <Container>
               <Subtitle>Olá, Juliana.</Subtitle>
               <Title>Nenhuma solicitação.</Title>
+            </Container>
+          )}
+
+          {/* MOTORISTA ESTA EM CORRIDA */}
+          {tipo == 'M' && status == 'C' && (
+            <Container border="primary" justify="flex-end" align="flex-start">
+              <Container padding={20} row>
+                <Container align="flex-start" row>
+                  <Avatar
+                    small
+                    source={{
+                      uri: 'https://avatars.githubusercontent.com/u/93217081?v=4',
+                    }}
+                  />
+                  <Spacer width="10px" />
+                  <Container align="flex-start">
+                    <Subtitle bold>Emanuel (2km)</Subtitle>
+
+                    <Container justify="flex-start" align="center" row>
+                      <Bullet />
+                      <Subtitle small numberOfLines={1}>Endereço de embarque completo</Subtitle>
+                    </Container>
+                    <Container justify="flex-start" align="center" row>
+                      <Bullet destination />
+                      <Subtitle small numberOfLines={1}>Endereço de destino completo</Subtitle>
+                    </Container>
+                  </Container>
+                </Container>
+                <VerticalSeparator />
+                <Container width={100}>
+                  <Title small>R$ 12,90</Title>
+                  <Subtitle small bold>Aprox. 5 mins</Subtitle>
+                </Container>
+              </Container>
+              <Button>
+                <ButtonText>Aceitar Corrida</ButtonText>
+              </Button>
             </Container>
           )}
         </Container>
